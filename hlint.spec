@@ -5,7 +5,7 @@
 %global pkgver %{pkg_name}-%{version}
 
 Name:           hlint
-Version:        2.0.8
+Version:        2.0.9
 Release:        1%{?dist}
 Summary:        Haskell source code suggestions
 
@@ -36,6 +36,11 @@ BuildRequires:  ghc-vector-devel
 BuildRequires:  ghc-yaml-devel
 # End cabal-rpm deps
 BuildRequires:  cabal-install > 1.18
+%if 0%{?fedora} < 26
+# for h-s-e
+BuildRequires:  happy
+%endif
+
 
 %description
 HLint gives suggestions on how to improve your source code.
@@ -71,5 +76,8 @@ cp -pr .cabal-sandbox/share/*/%{pkgver} %{buildroot}%{_datadir}
 
 
 %changelog
+* Wed Jun 28 2017 Jens Petersen <petersen@redhat.com> - 2.0.9-1
+- update to 2.0.9
+
 * Sun Jun 11 2017 Jens Petersen <petersen@redhat.com> - 2.0.8-1
 - initial copr package
