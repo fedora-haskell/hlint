@@ -4,8 +4,8 @@
 %global pkg_name hlint
 %global pkgver %{pkg_name}-%{version}
 
-Name:           hlint
-Version:        2.0.9
+Name:           %{pkg_name}
+Version:        2.0.11
 Release:        1%{?dist}
 Summary:        Haskell source code suggestions
 
@@ -16,15 +16,19 @@ Source0:        https://hackage.haskell.org/package/%{pkgver}/%{pkgver}.tar.gz
 BuildRequires:  ghc-Cabal-devel
 #BuildRequires:  ghc-rpm-macros
 # Begin cabal-rpm deps:
+#BuildRequires:  chrpath
+BuildRequires:  ghc-aeson-devel
 BuildRequires:  ghc-ansi-terminal-devel
 BuildRequires:  ghc-bytestring-devel
 BuildRequires:  ghc-cmdargs-devel
 BuildRequires:  ghc-containers-devel
 BuildRequires:  ghc-cpphs-devel
+BuildRequires:  ghc-data-default-devel
 BuildRequires:  ghc-directory-devel
 #BuildRequires:  ghc-extra-devel
 BuildRequires:  ghc-filepath-devel
 BuildRequires:  ghc-haskell-src-exts-devel
+#BuildRequires:  ghc-haskell-src-exts-util-devel
 BuildRequires:  ghc-hscolour-devel
 BuildRequires:  ghc-process-devel
 #BuildRequires:  ghc-refact-devel
@@ -76,6 +80,9 @@ cp -pr .cabal-sandbox/share/*/%{pkgver} %{buildroot}%{_datadir}
 
 
 %changelog
+* Tue Dec  5 2017 Jens Petersen <petersen@redhat.com> - 2.0.11-1
+- update to 2.0.11
+
 * Wed Jun 28 2017 Jens Petersen <petersen@redhat.com> - 2.0.9-1
 - update to 2.0.9
 
