@@ -5,7 +5,7 @@
 %global pkgver %{pkg_name}-%{version}
 
 Name:           %{pkg_name}
-Version:        2.0.11
+Version:        2.1
 Release:        1%{?dist}
 Summary:        Haskell source code suggestions
 
@@ -25,13 +25,15 @@ BuildRequires:  ghc-containers-devel
 BuildRequires:  ghc-cpphs-devel
 BuildRequires:  ghc-data-default-devel
 BuildRequires:  ghc-directory-devel
-#BuildRequires:  ghc-extra-devel
+BuildRequires:  ghc-extra-devel
 BuildRequires:  ghc-filepath-devel
 BuildRequires:  ghc-haskell-src-exts-devel
-#BuildRequires:  ghc-haskell-src-exts-util-devel
+%if 0%{?fedora} >= 27
+BuildRequires:  ghc-haskell-src-exts-util-devel
+%endif
 BuildRequires:  ghc-hscolour-devel
 BuildRequires:  ghc-process-devel
-#BuildRequires:  ghc-refact-devel
+BuildRequires:  ghc-refact-devel
 BuildRequires:  ghc-text-devel
 BuildRequires:  ghc-transformers-devel
 BuildRequires:  ghc-uniplate-devel
@@ -80,6 +82,9 @@ cp -pr .cabal-sandbox/share/*/%{pkgver} %{buildroot}%{_datadir}
 
 
 %changelog
+* Wed Feb 21 2018 Jens Petersen <petersen@redhat.com> - 2.1-1
+- update to 2.1
+
 * Tue Dec  5 2017 Jens Petersen <petersen@redhat.com> - 2.0.11-1
 - update to 2.0.11
 
