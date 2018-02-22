@@ -42,11 +42,8 @@ BuildRequires:  ghc-vector-devel
 BuildRequires:  ghc-yaml-devel
 # End cabal-rpm deps
 BuildRequires:  cabal-install > 1.18
-%if 0%{?fedora} < 26
 # for h-s-e
 BuildRequires:  happy
-%endif
-
 
 %description
 HLint gives suggestions on how to improve your source code.
