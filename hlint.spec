@@ -5,7 +5,7 @@
 %global pkgver %{pkg_name}-%{version}
 
 Name:           %{pkg_name}
-Version:        2.1
+Version:        2.1.3
 Release:        1%{?dist}
 Summary:        Haskell source code suggestions
 
@@ -79,6 +79,9 @@ cp -pr .cabal-sandbox/share/*/%{pkgver} %{buildroot}%{_datadir}
 
 
 %changelog
+* Fri Apr 20 2018 Jens Petersen <petersen@redhat.com> - 2.1.3-1
+- 2.1.3
+
 * Wed Feb 21 2018 Jens Petersen <petersen@redhat.com> - 2.1-1
 - update to 2.1
 
