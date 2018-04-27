@@ -57,7 +57,7 @@ HLint gives suggestions on how to improve your source code.
 %global cabal cabal
 [ -d "$HOME/.cabal" ] || %cabal update
 %cabal sandbox init
-%cabal install
+%cabal install --force-reinstalls
 
 
 %install
@@ -81,6 +81,7 @@ cp -pr .cabal-sandbox/share/*/%{pkgver} %{buildroot}%{_datadir}
 %changelog
 * Fri Apr 20 2018 Jens Petersen <petersen@redhat.com> - 2.1.3-1
 - 2.1.3
+- --force-reinstalls needed for F26 and F27
 
 * Wed Feb 21 2018 Jens Petersen <petersen@redhat.com> - 2.1-1
 - update to 2.1
