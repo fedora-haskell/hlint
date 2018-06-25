@@ -1,11 +1,18 @@
-# nothing to see here
-%global debug_package %{nil}
+# https://fedoraproject.org/wiki/Packaging:Haskell
+
+%global ghc_without_dynamic 1
+%global ghc_without_shared 1
+%global without_prof 1
+%global without_haddock 1
 
 %global pkg_name hlint
 %global pkgver %{pkg_name}-%{version}
 
+# nothing to see here
+%global debug_package %{nil}
+
 Name:           %{pkg_name}
-Version:        2.1.3
+Version:        2.1.6
 Release:        1%{?dist}
 Summary:        Haskell source code suggestions
 
@@ -14,7 +21,7 @@ Url:            https://hackage.haskell.org/package/%{name}
 Source0:        https://hackage.haskell.org/package/%{pkgver}/%{pkgver}.tar.gz
 
 BuildRequires:  ghc-Cabal-devel
-#BuildRequires:  ghc-rpm-macros
+BuildRequires:  ghc-rpm-macros
 # Begin cabal-rpm deps:
 #BuildRequires:  chrpath
 BuildRequires:  ghc-aeson-devel
@@ -54,23 +61,25 @@ HLint gives suggestions on how to improve your source code.
 
 
 %build
+[ -d "$HOME/.cabal" ] || cabal update
 %global cabal cabal
-[ -d "$HOME/.cabal" ] || %cabal update
 %cabal sandbox init
-%cabal install --force-reinstalls
+%cabal install --only-dependencies
+%ghc_bin_build
 
 
 %install
-mkdir -p %{buildroot}%{_bindir}
-install -p .cabal-sandbox/bin/%{name} %{buildroot}%{_bindir}
+%ghc_bin_install
 
 mkdir -p %{buildroot}%{_mandir}/man1
-cp -p .cabal-sandbox/share/*/%{pkgver}/hlint.1 %{buildroot}%{_mandir}/man1
+cp -p data/hlint.1 %{buildroot}%{_mandir}/man1
 
-cp -pr .cabal-sandbox/share/*/%{pkgver} %{buildroot}%{_datadir}
+find %{buildroot}%{_libdir} -name "libHS%{pkg_name}-%{version}-*.so" -delete
+rm -r %{buildroot}%{ghclibdir}
 
 
 %files
+%license LICENSE
 %license .cabal-sandbox/share/doc/*/*
 %doc CHANGES.txt README.md
 %{_bindir}/%{name}
@@ -79,6 +88,10 @@ cp -pr .cabal-sandbox/share/*/%{pkgver} %{buildroot}%{_datadir}
 
 
 %changelog
+* Mon Jun 25 2018 Jens Petersen <petersen@redhat.com> - 2.1.6-1
+- update to 2.1.6
+- build better with macros to fix datadir path
+
 * Fri Apr 20 2018 Jens Petersen <petersen@redhat.com> - 2.1.3-1
 - 2.1.3
 - --force-reinstalls needed for F26 and F27
