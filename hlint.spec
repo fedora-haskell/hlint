@@ -64,7 +64,8 @@ HLint gives suggestions on how to improve your source code.
 [ -d "$HOME/.cabal" ] || cabal update
 %global cabal cabal
 %cabal sandbox init
-%cabal install --only-dependencies
+# --force-reinstalls needed on f26 and f27
+%cabal install --only-dependencies --force-reinstalls
 %ghc_bin_build
 
 
