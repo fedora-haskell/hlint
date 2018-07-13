@@ -12,7 +12,7 @@
 %global debug_package %{nil}
 
 Name:           %{pkg_name}
-Version:        2.1.6
+Version:        2.1.8
 Release:        1%{?dist}
 Summary:        Haskell source code suggestions
 
@@ -89,6 +89,9 @@ rm -r %{buildroot}%{ghclibdir}
 
 
 %changelog
+* Fri Jul 13 2018 Jens Petersen <petersen@redhat.com> - 2.1.8-1
+- update to 2.1.8
+
 * Mon Jun 25 2018 Jens Petersen <petersen@redhat.com> - 2.1.6-1
 - update to 2.1.6
 - build better with macros to fix datadir path
