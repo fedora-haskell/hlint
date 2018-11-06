@@ -12,7 +12,7 @@
 %global debug_package %{nil}
 
 Name:           %{pkg_name}
-Version:        2.1.8
+Version:        2.1.10
 Release:        1%{?dist}
 Summary:        Haskell source code suggestions
 
@@ -61,8 +61,8 @@ HLint gives suggestions on how to improve your source code.
 
 
 %build
-[ -d "$HOME/.cabal" ] || cabal update
 %global cabal cabal
+%cabal update
 %cabal sandbox init
 # --force-reinstalls needed on f26 and f27
 %cabal install --only-dependencies --force-reinstalls
@@ -81,7 +81,9 @@ rm -r %{buildroot}%{ghclibdir}
 
 %files
 %license LICENSE
+%if 0%{?fedora} >= 29
 %license .cabal-sandbox/share/doc/*/*
+%endif
 %doc CHANGES.txt README.md
 %{_bindir}/%{name}
 %{_datadir}/%{name}-%{version}
@@ -89,6 +91,9 @@ rm -r %{buildroot}%{ghclibdir}
 
 
 %changelog
+* Mon Aug 20 2018 Jens Petersen <petersen@redhat.com> - 2.1.10-1
+- update to 2.1.10
+
 * Fri Jul 13 2018 Jens Petersen <petersen@redhat.com> - 2.1.8-1
 - update to 2.1.8
 
