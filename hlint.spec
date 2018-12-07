@@ -12,7 +12,7 @@
 %global debug_package %{nil}
 
 Name:           %{pkg_name}
-Version:        2.1.10
+Version:        2.1.11
 Release:        1%{?dist}
 Summary:        Haskell source code suggestions
 
@@ -91,6 +91,10 @@ rm -r %{buildroot}%{ghclibdir}
 
 
 %changelog
+* Fri Dec  7 2018 Jens Petersen <petersen@redhat.com> - 2.1.11-1
+- update to 2.1.11
+- https://hackage.haskell.org/package/hlint-2.1.11/changelog
+
 * Mon Aug 20 2018 Jens Petersen <petersen@redhat.com> - 2.1.10-1
 - update to 2.1.10
 
