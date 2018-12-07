@@ -81,7 +81,7 @@ rm -r %{buildroot}%{ghclibdir}
 
 %files
 %license LICENSE
-%if 0%{?fedora} >= 29
+%if 0%{?fedora} < 29
 %license .cabal-sandbox/share/doc/*/*
 %endif
 %doc CHANGES.txt README.md
