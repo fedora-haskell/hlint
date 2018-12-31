@@ -12,7 +12,7 @@
 %global debug_package %{nil}
 
 Name:           %{pkg_name}
-Version:        2.1.11
+Version:        2.1.12
 Release:        1%{?dist}
 Summary:        Haskell source code suggestions
 
@@ -32,7 +32,9 @@ BuildRequires:  ghc-containers-devel
 BuildRequires:  ghc-cpphs-devel
 BuildRequires:  ghc-data-default-devel
 BuildRequires:  ghc-directory-devel
+%if 0%{?fedora}
 BuildRequires:  ghc-extra-devel
+%endif
 BuildRequires:  ghc-filepath-devel
 BuildRequires:  ghc-haskell-src-exts-devel
 %if 0%{?fedora} >= 27
@@ -40,7 +42,9 @@ BuildRequires:  ghc-haskell-src-exts-util-devel
 %endif
 BuildRequires:  ghc-hscolour-devel
 BuildRequires:  ghc-process-devel
+%if 0%{?fedora}
 BuildRequires:  ghc-refact-devel
+%endif
 BuildRequires:  ghc-text-devel
 BuildRequires:  ghc-transformers-devel
 BuildRequires:  ghc-uniplate-devel
@@ -50,7 +54,9 @@ BuildRequires:  ghc-yaml-devel
 # End cabal-rpm deps
 BuildRequires:  cabal-install > 1.18
 # for h-s-e
+%if 0%{?fedora}
 BuildRequires:  happy
+%endif
 
 %description
 HLint gives suggestions on how to improve your source code.
@@ -64,6 +70,9 @@ HLint gives suggestions on how to improve your source code.
 %global cabal cabal
 %cabal update
 %cabal sandbox init
+%if 0%{?!fedora}
+%cabal install happy
+%endif
 # --force-reinstalls needed on f26 and f27
 %cabal install --only-dependencies --force-reinstalls
 %ghc_bin_build
@@ -91,6 +100,9 @@ rm -r %{buildroot}%{ghclibdir}
 
 
 %changelog
+* Mon Dec 31 2018 Jens Petersen <petersen@redhat.com> - 2.1.12-1
+- build newer happy on epel7
+
 * Fri Dec  7 2018 Jens Petersen <petersen@redhat.com> - 2.1.11-1
 - update to 2.1.11
 - https://hackage.haskell.org/package/hlint-2.1.11/changelog
