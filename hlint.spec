@@ -12,18 +12,19 @@
 %global debug_package %{nil}
 
 Name:           %{pkg_name}
-Version:        2.1.12
+Version:        2.1.15
 Release:        1%{?dist}
 Summary:        Haskell source code suggestions
 
 License:        BSD
 Url:            https://hackage.haskell.org/package/%{name}
+# Begin cabal-rpm sources:
 Source0:        https://hackage.haskell.org/package/%{pkgver}/%{pkgver}.tar.gz
+# End cabal-rpm sources
 
+# Begin cabal-rpm deps:
 BuildRequires:  ghc-Cabal-devel
 BuildRequires:  ghc-rpm-macros
-# Begin cabal-rpm deps:
-#BuildRequires:  chrpath
 BuildRequires:  ghc-aeson-devel
 BuildRequires:  ghc-ansi-terminal-devel
 BuildRequires:  ghc-bytestring-devel
@@ -63,7 +64,9 @@ HLint gives suggestions on how to improve your source code.
 
 
 %prep
+# Begin cabal-rpm setup:
 %setup -q
+# End cabal-rpm setup
 
 
 %build
@@ -100,6 +103,9 @@ rm -r %{buildroot}%{ghclibdir}
 
 
 %changelog
+* Mon Mar 18 2019 Jens Petersen <petersen@redhat.com> - 2.1.15-1
+- update to 2.1.15
+
 * Mon Dec 31 2018 Jens Petersen <petersen@redhat.com> - 2.1.12-1
 - build newer happy on epel7
 
