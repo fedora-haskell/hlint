@@ -55,7 +55,7 @@ BuildRequires:  ghc-yaml-devel
 # End cabal-rpm deps
 BuildRequires:  cabal-install > 1.18
 # for h-s-e
-%if 0%{?fedora}
+%if 0%{?fedora} || 0%{?rhel} > 7
 BuildRequires:  happy
 %endif
 
@@ -73,7 +73,7 @@ HLint gives suggestions on how to improve your source code.
 %global cabal cabal
 %cabal update
 %cabal sandbox init
-%if 0%{?!fedora}
+%if 0%{?rhel} && 0%{?rhel} < 8
 %cabal install happy
 %endif
 # --force-reinstalls needed on f26 and f27
@@ -87,7 +87,7 @@ HLint gives suggestions on how to improve your source code.
 mkdir -p %{buildroot}%{_mandir}/man1
 cp -p data/hlint.1 %{buildroot}%{_mandir}/man1
 
-find %{buildroot}%{_libdir} -name "libHS%{pkg_name}-%{version}-*.so" -delete
+find %{buildroot}%{_libdir} -name "libHS%{pkgver}-*.so" -delete
 rm -r %{buildroot}%{ghclibdir}
 
 
